@@ -10,6 +10,9 @@ namespace Gameplay.Enemies
         private void Start()
         {
             TryGetComponent(out _agent);
+            
+            _agent.updateUpAxis = false;
+
             MarkDestiny();
         }
         
@@ -20,7 +23,7 @@ namespace Gameplay.Enemies
             if (NavMesh.SamplePosition(pos, out var navMeshHit, 10f, NavMesh.AllAreas))
             {
                 Vector2 navMeshPosition = navMeshHit.position;
-                _agent.SetDestination(navMeshPosition);
+                _agent.SetDestination(new Vector3(navMeshPosition.x, navMeshPosition.y, 0f));
             }
             else
             {
