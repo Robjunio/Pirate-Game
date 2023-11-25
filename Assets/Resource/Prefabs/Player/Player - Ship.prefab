@@ -142,10 +142,10 @@ MonoBehaviour:
   maxHealth: 10
   speed: 1.5
   angularSpeed: 10
-  cannonBallPrefab: {fileID: 8815724347729468120, guid: 280493722131bf945b9a44e68415838d, type: 3}
-  bulletSpeed: 2.5
+  cannonBallPrefab: {fileID: 580732598161233399, guid: 099279445d548f8449735d55de4a6081, type: 3}
+  bulletSpeed: 5
   bulletDamage: 1
-  bulletTimeToBeDestroyed: 0
+  bulletTimeToBeDestroyed: 1
   objectPoolingSize: 10
 --- !u!114 &1571881628849963937
 MonoBehaviour:
@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adbe8c87ebb34dde97000d4c9e07ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamageStatusFeedback:
+  - {fileID: 21300000, guid: 558f4159858334f4ea7ae207595cf709, type: 3}
+  - {fileID: 21300000, guid: bb62d29a16b0ece478d7cb03d14b07c9, type: 3}
 --- !u!114 &878901090297613824
 MonoBehaviour:
   m_ObjectHideFlags: 0
