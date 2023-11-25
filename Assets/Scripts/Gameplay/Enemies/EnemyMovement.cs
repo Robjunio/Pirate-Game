@@ -11,7 +11,7 @@ namespace Gameplay.Enemies
         {
             TryGetComponent(out _agent);
             
-            _agent.updateUpAxis = false;
+            //_agent.updateUpAxis = false;
 
             MarkDestiny();
         }

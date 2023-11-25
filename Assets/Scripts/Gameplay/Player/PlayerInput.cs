@@ -1,31 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+namespace Gameplay.Player
 {
-    public delegate void MoveAction();
-    public static event MoveAction OnMoved;
-    
-    public delegate void RotateAction(Vector2 dir);
-    public static event RotateAction OnRotated;
-
-    // Update is called once per frame
-    void FixedUpdate()
+    public class PlayerInput : MonoBehaviour
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        public delegate void MoveAction();
+        public static event MoveAction OnMoved;
+    
+        public delegate void RotateAction(Vector2 dir);
+        public static event RotateAction OnRotated;
+
+        public delegate void SingleFireAction();
+        public static event SingleFireAction OnSingleShoot;
+    
+        public delegate void ParallelFireAction(Vector2 dir);
+        public static event ParallelFireAction OnParallelShoot;
+
+        // Update is called once per frame
+        void FixedUpdate()
         {
-            OnMoved?.Invoke();
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                OnMoved?.Invoke();
+            }
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                OnRotated?.Invoke(Vector2.left);
+            }
+
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                OnRotated?.Invoke(Vector2.right);
+            }
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        private void Update()
         {
-            OnRotated?.Invoke(Vector2.left);
-        }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                OnSingleShoot?.Invoke();
+            }
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                OnParallelShoot?.Invoke(Vector2.right);
+            }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            OnRotated?.Invoke(Vector2.right);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                OnParallelShoot?.Invoke(Vector2.left);
+            }
         }
     }
 }
