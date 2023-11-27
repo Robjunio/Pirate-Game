@@ -24,7 +24,10 @@ namespace Gameplay.Enemies.EnemyShooter
             enemy.GetNavMeshAgent().SetDestination(target.position);
         }
 
-        public override void OnCollisionEnter(EnemyBehaviourManager enemy, Collision2D col){}
+        public override void OnCollisionEnter(EnemyBehaviourManager enemy, Collision2D col)
+        {
+            
+        }
 
         private void Rotate(EnemyBehaviourManager enemy)
         {

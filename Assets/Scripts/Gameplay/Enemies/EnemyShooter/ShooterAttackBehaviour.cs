@@ -40,7 +40,7 @@ namespace Gameplay.Enemies.EnemyShooter
 
         public override void OnCollisionEnter(EnemyBehaviourManager enemy, Collision2D col)
         {
-            throw new System.NotImplementedException();
+            
         }
         
         private void Rotate(EnemyBehaviourManager enemy)

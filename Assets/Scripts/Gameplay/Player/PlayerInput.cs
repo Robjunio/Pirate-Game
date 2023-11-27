@@ -1,10 +1,13 @@
 using System;
+using Gameplay.Managers;
 using UnityEngine;
 
 namespace Gameplay.Player
 {
     public class PlayerInput : MonoBehaviour
     {
+        private bool _playerActive = true;
+        
         public delegate void MoveAction();
         public static event MoveAction OnMoved;
     
@@ -20,6 +23,8 @@ namespace Gameplay.Player
         // Update is called once per frame
         void FixedUpdate()
         {
+            if(!_playerActive) return;
+            
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 OnMoved?.Invoke();
@@ -38,6 +43,8 @@ namespace Gameplay.Player
 
         private void Update()
         {
+            if(!_playerActive) return;
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 OnSingleShoot?.Invoke();
@@ -52,5 +59,21 @@ namespace Gameplay.Player
                 OnParallelShoot?.Invoke(Vector2.left);
             }
         }
+        
+        private void Stop()
+        {
+            _playerActive = false;
+        }
+        
+        private void OnEnable()
+        {
+            GameController.EndGame += Stop;
+        }
+    
+        private void OnDisable()
+        {
+            GameController.EndGame -= Stop;
+        }
+        
     }
 }

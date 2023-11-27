@@ -11,6 +11,8 @@ namespace Gameplay.Managers
 
         protected Slider lifeBar { get; set; }
 
+        protected bool die;
+
         protected virtual void Start()
         {
             _currentHealth = MaxHealth;
@@ -21,6 +23,8 @@ namespace Gameplay.Managers
 
         public virtual void GetHit(float damage)
         {
+            if(die) return;
+            
             _currentHealth -= damage;
 
             if (_currentHealth <= 0f)
@@ -35,6 +39,7 @@ namespace Gameplay.Managers
 
         protected virtual void Die()
         {
+            die = true;
             lifeBar.gameObject.transform.parent.gameObject.SetActive(false);
         }
     }

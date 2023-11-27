@@ -12,6 +12,7 @@ public class EnemiesSpawner : MonoBehaviour
     [SerializeField] private GameObject[] _enemiesPrefabs;
 
     private float timmer;
+    private bool canGenerate = true;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!canGenerate) return;
         timmer += Time.deltaTime;
         if (timmer >= spawnTime)
         {
@@ -41,4 +43,20 @@ public class EnemiesSpawner : MonoBehaviour
         
         return GetAPositionInMap();
     }
+
+    private void StopGeneration()
+    {
+        canGenerate = false;
+    }
+        
+    private void OnEnable()
+    {
+        GameController.EndGame += StopGeneration;
+    }
+    
+    private void OnDisable()
+    {
+        GameController.EndGame -= StopGeneration;
+    }
 }
+

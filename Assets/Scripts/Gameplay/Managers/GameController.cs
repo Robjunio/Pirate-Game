@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
 
 namespace Gameplay.Managers
 {
     public class GameController : MonoBehaviour
     {
+        public delegate void End();
+        public static event End EndGame;
+        
         private float spawnTime = 4f;
-        private float gameTime = 2f;
+        private float gameTime = 90f;
 
-        private float _minumumGameTime = 1f;
-        private float _maximumGameTime = 1f;
+        private float _minumumGameTime = 60f;
+        private float _maximumGameTime = 180f;
         
         public static GameController instance;
         private Transform _playerTransform;
@@ -56,6 +60,16 @@ namespace Gameplay.Managers
         public float GetSpawnTime()
         {
             return spawnTime;
+        }
+
+        public float GetGameTime()
+        {
+            return gameTime;
+        }
+
+        public void OnEndGame()
+        {
+            EndGame?.Invoke();
         }
     }
 }

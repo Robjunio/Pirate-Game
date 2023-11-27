@@ -42,9 +42,12 @@ namespace Gameplay.Player
             }
         }
 
-        public void DamageBoat()
+        protected override void Die()
         {
-            GetHit(1);
+            base.Die();
+            
+            GameController.instance.OnEndGame();
+            gameObject.SetActive(false);
         }
     }
 }

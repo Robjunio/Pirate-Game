@@ -31,7 +31,7 @@ namespace Gameplay.Enemies.EnemyChaser
 
         public override void OnCollisionEnter(EnemyBehaviourManager enemy, Collision2D col)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Enemy got hit");
         }
 
         private void Rotate(EnemyBehaviourManager enemy)

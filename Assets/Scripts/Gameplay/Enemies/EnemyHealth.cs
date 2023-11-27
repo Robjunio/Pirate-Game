@@ -42,7 +42,8 @@ namespace Gameplay.Enemies
         {
             base.Die();
             
-            gameObject.SetActive(false);
+            ScoreManager.instance.ScorePoint();
+            Destroy(gameObject);
         }
     }
 }

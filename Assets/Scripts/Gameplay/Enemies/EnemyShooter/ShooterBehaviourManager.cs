@@ -29,13 +29,6 @@ namespace Gameplay.Enemies.EnemyShooter
             _currentBehaviour.EnterState(this);
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-
-            
-            _currentBehaviour.OnCollisionEnter(this, col);
-        }
-        
         public override void InstanceAnShoot(Vector2 dir)
         {
             var bullet = Instantiate(GetBulletPrefab(), transform.position, 
