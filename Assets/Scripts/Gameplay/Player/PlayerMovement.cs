@@ -20,7 +20,7 @@ namespace Gameplay.Player
         
         private void Rotate(Vector2 dir)
         {
-            _rigidbody2D.AddTorque(_player.GetAngularSpeed() * -dir.x * Time.fixedDeltaTime);
+            _rigidbody2D.AddTorque(_player.GetAngularSpeed() * -dir.x * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
         private void OnEnable()
         {

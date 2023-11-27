@@ -7,6 +7,8 @@ namespace Gameplay.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
+        [SerializeField] private Transform poolingParent;
+        
         private PlayerController _player;
         private Transform[] rightParalelShootPosition; 
         private Transform[] leftParalelShootPosition;
@@ -94,6 +96,8 @@ namespace Gameplay.Player
         {
             var bullet = Instantiate(_player.GetCannonBallPrefab(), Vector3.zero, quaternion.identity).GetComponent<Projectiles>();
             objPoolingCannonBalls.Add(bullet.GetComponent<Projectiles>());
+            
+            bullet.transform.SetParent(poolingParent);
 
             bullet.Damage = _player.GetBulletDamage();
             bullet.Speed = _player.GetBulletSpeed();

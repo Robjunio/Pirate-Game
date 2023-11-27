@@ -1,12 +1,13 @@
-using System;
 using System.Collections;
 using Gameplay.Managers;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Gameplay.Bullets
 {
     public class Projectiles : MonoBehaviour
     {
+        [SerializeField] private GameObject explosionPrefab;
         public float Speed { private get; set; }
         public float Damage { private get; set; }
         public float TimeActive { private get; set; }
@@ -31,6 +32,8 @@ namespace Gameplay.Bullets
         private void OnTriggerEnter2D(Collider2D col)
         {
             col.gameObject.GetComponent<HealthSystem>().GetHit(Damage);
+            Instantiate(explosionPrefab, transform.position, quaternion.identity);
+            DeactivateProjectile();
         }
         
         public void ResetBullet()

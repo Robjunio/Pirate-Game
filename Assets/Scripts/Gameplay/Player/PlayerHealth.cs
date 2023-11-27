@@ -1,6 +1,6 @@
 using Gameplay.Managers;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Gameplay.Player
 {
@@ -11,21 +11,27 @@ namespace Gameplay.Player
 
         [SerializeField] private Sprite[] DamageStatusFeedback;
         private float LittleDamage = 0.5f;
-        private float BigDamage = 0.2f;
+        private float BigDamage = 0.25f;
 
-        protected override void Start()
+        private void Awake()
         {
             TryGetComponent(out _player);
             TryGetComponent(out _spriteRenderer);
 
-            MaxHealth = _player.GetMaxHealth();
+            lifeBar = transform.GetChild(5).GetComponentInChildren<Slider>();
+        }
 
+        protected override void Start()
+        {
+            MaxHealth = _player.GetMaxHealth();
+            
             base.Start();
         }
 
         public override void GetHit(float damage)
         {
             base.GetHit(damage);
+            
             if (_currentHealth / MaxHealth <= LittleDamage)
             {
                 _spriteRenderer.sprite = DamageStatusFeedback[0];
@@ -34,11 +40,6 @@ namespace Gameplay.Player
             {
                 _spriteRenderer.sprite = DamageStatusFeedback[1];
             }
-        }
-        
-        protected override void Die()
-        {
-            base.Die();
         }
 
         public void DamageBoat()

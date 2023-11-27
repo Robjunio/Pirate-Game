@@ -1,9 +1,33 @@
+using Gameplay.Managers;
 using UnityEngine.AI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemiesSpawner : MonoBehaviour
 {
+    [Header("Enemies Spawn Information")]
     [SerializeField] private float radiusOfSpawn;
+    private float spawnTime;
+
+    [SerializeField] private GameObject[] _enemiesPrefabs;
+
+    private float timmer;
+
+    private void Start()
+    {
+        spawnTime = GameController.instance.GetSpawnTime();
+    }
+
+    private void FixedUpdate()
+    {
+        timmer += Time.deltaTime;
+        if (timmer >= spawnTime)
+        {
+            Instantiate(_enemiesPrefabs[Random.Range(0, _enemiesPrefabs.Length)], GetAPositionInMap(),
+                Quaternion.identity);
+            timmer = 0;
+        }
+    }
 
     private Vector2 GetAPositionInMap()
     {

@@ -1,3 +1,4 @@
+using Gameplay.Managers;
 using UnityEngine;
 
 namespace Gameplay.Player
@@ -23,6 +24,8 @@ namespace Gameplay.Player
         {
             endOfShip = transform.GetChild(0);
             startOfShip = transform.GetChild(1);
+
+            GameController.instance.SetPlayerTransform(transform);
         }
 
         public float GetMaxHealth()
